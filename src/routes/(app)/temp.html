@@ -1,0 +1,71 @@
+<!-- <script lang="ts">
+	import { settings } from '$settings';
+	let max_cols = $state(12);
+	let gutter_size = $state(1);
+</script>
+
+<h1 class="content">{settings.app_name}</h1>
+
+<div class="layout full">
+	<div class="col c-half" />
+	<div class="col c-half" />
+	<div class="col c-full" />
+	<div class="col c-quarter" />
+	<div class="col c-quarter" />
+	<div class="col c-quarter" />
+	<div class="col c-quarter" />
+	<div class="col" style="--start: 1; --span: 1;"></div>
+	<div class="col" style="--start: 2; --span: 1;"></div>
+	<div class="col" style="--start: 3; --span: 1;"></div>
+	<div class="col" style="--start: 4; --span: 1;"></div>
+	<div class="col" style="--start: 5; --span: 1;"></div>
+	<div class="col" style="--start: 6; --span: 1;"></div>
+	<div class="col" style="--start: 7; --span: 1;"></div>
+	<div class="col" style="--start: 8; --span: 1;"></div>
+	<div class="col" style="--start: 9; --span: 1;"></div>
+	<div class="col" style="--start: 10; --span: 1;"></div>
+	<div class="col" style="--start: 11; --span: 1;"></div>
+	<div class="col" style="--start: 12; --span: 1;"></div>
+</div>
+
+<style>
+	.layout > * {
+		--real-start: calc(var(--start, 0) * 2);
+		grid-column: var(--real-start, 'start') / span var(--span, 'end');
+	}
+
+	.col {
+		border: 1px solid #000;
+		height: 100px;
+	}
+
+	.c-quarter {
+		--real-start: calc(2); /* Always starts at column 2 */
+		--span: calc((var(--gcs) / 2 - 1)); /* Half of the total columns, excluding the first gutter */
+
+		& + .c-quarter {
+			--real-start: calc((var(--span) + 3));
+			& + .c-quarter {
+				--real-start: calc((var(--span) * 2 + 4));
+				& + .c-quarter {
+					--real-start: calc((var(--span) * 3 + 5));
+				}
+			}
+		}
+	}
+
+	.c-half {
+		--real-start: calc(2); /* Always starts at column 2 */
+		--span: calc((var(--gcs) - 1)); /* Half of the total columns, excluding the first gutter */
+
+		& + .c-half {
+			--real-start: calc(
+				(var(--span) + 3)
+			); /* Starts after the first .c-half including its span and the gutter */
+		}
+	}
+	.c-full {
+		--real-start: 2;
+		--span: calc((var(--gcs) * 2 - 1));
+	}
+</style> -->
