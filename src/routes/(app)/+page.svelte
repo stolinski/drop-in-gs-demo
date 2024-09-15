@@ -14,35 +14,38 @@
 		</div>
 
 		<div class="layout full" style:--gcs={max_cols}>
-			<div class="col c-half"></div>
-			<div class="col c-half"></div>
-			<div class="col c-full"></div>
-			<div class="col c-quarter"></div>
-			<div class="col c-quarter"></div>
-			<div class="col c-quarter"></div>
-			<div class="col c-quarter"></div>
+			<div class="col c-half"><p>.c-half</p></div>
+			<div class="col c-half"><p>.c-half</p></div>
+			<div class="col c-full"><p>.c-full</p></div>
+			<div class="col c-quarter"><p>.c-quarter</p></div>
+			<div class="col c-quarter"><p>.c-quarter</p></div>
+			<div class="col c-quarter"><p>.c-quarter</p></div>
+			<div class="col c-quarter"><p>.c-quarter</p></div>
 
-			<div class="col" style="--start: 1; --span: 1;"></div>
-			<div class="col" style="--start: 2; --span: 1;"></div>
-			<div class="col" style="--start: 3; --span: 1;"></div>
-			<div class="col" style="--start: 4; --span: 1;"></div>
-			<div class="col" style="--start: 5; --span: 1;"></div>
-			<div class="col" style="--start: 6; --span: 1;"></div>
-			<div class="col" style="--start: 7; --span: 1;"></div>
-			<div class="col" style="--start: 8; --span: 1;"></div>
-			<div class="col" style="--start: 9; --span: 1;"></div>
-			<div class="col" style="--start: 10; --span: 1;"></div>
-			<div class="col" style="--start: 11; --span: 1;"></div>
-			<div class="col" style="--start: 12; --span: 1;"></div>
+			<div class="col" style="--start: 1; --span: 1;"><p>--start: 1;<br />--span: 1;</p></div>
+			<div class="col" style="--start: 2; --span: 1;"><p>--start: 2;<br />--span: 1;</p></div>
+			<div class="col" style="--start: 3; --span: 1;"><p>--start: 3;<br />--span: 1;</p></div>
+			<div class="col" style="--start: 4; --span: 1;"><p>--start: 4;<br />--span: 1;</p></div>
+			<div class="col" style="--start: 5; --span: 1;"><p>--start: 5;<br />--span: 1;</p></div>
+			<div class="col" style="--start: 6; --span: 1;"><p>--start: 6;<br />--span: 1;</p></div>
+			<div class="col" style="--start: 7; --span: 1;"><p>--start: 7;<br />--span: 1;</p></div>
+			<div class="col" style="--start: 8; --span: 1;"><p>--start: 8;<br />--span: 1;</p></div>
+			<div class="col" style="--start: 9; --span: 1;"><p>--start: 9;<br />--span: 1;</p></div>
+			<div class="col" style="--start: 10; --span: 1;"><p>--start: 10;<br />--span: 1;</p></div>
+			<div class="col" style="--start: 11; --span: 1;"><p>--start: 11;<br />--span: 1;</p></div>
+			<div class="col" style="--start: 12; --span: 1;"><p>--start: 12;<br />--span: 1;</p></div>
 		</div>
 	</div>
 </main>
 
 <style>
 	.layout {
+		gap: 20px 0;
+	}
+
+	.layout {
 		display: grid;
-		grid-template-rows: auto;
-		grid-auto-flow: dense;
+		align-items: start;
 		--gcs: 12;
 		--gg: 2.5;
 		--gc: minmax(50px, 100px);
@@ -54,6 +57,12 @@
 			repeat(calc(var(--gcs) - 1), [col-start] var(--gc) [col-end gutter] var(--g-gutter-width))
 			[last-col-start col-start] var(--gc) [col-end content-end gutter] var(--g-boundary)
 			[end];
+		@media (width < 1000px) {
+			--gcs: 8 !important;
+		}
+		@media (width < 500px) {
+			--gcs: 4 !important;
+		}
 	}
 
 	.layout > * {
@@ -62,23 +71,34 @@
 	}
 
 	.col {
-		border: 1px solid #000;
+		border: 1px solid var(--fg);
 		height: 100px;
+		align-items: center;
+		display: flex;
+		justify-content: center;
 		box-shadow: 0 2px 10px 1px rgb(0 0 0 / 0.2);
+		p {
+			--fl: -2;
+			margin: 0;
+			text-align: center;
+		}
 	}
 
 	.c-quarter {
 		--start: 1; /* Always starts at column 2 */
 		--span: calc((var(--gcs) / 2) - 1); /* Half of the total columns, excluding the first gutter */
-		& + .c-quarter {
-			--start: calc((var(--gcs) / 4) + 1);
-			& + .c-quarter {
-				--start: calc((var(--gcs) / 4) * 2 + 1);
-				& + .c-quarter {
-					--start: calc(((var(--gcs) / 4) * 3) + 1);
-				}
-			}
-		}
+	}
+
+	.c-quarter:nth-child(2 of .c-quarter) {
+		--start: calc((var(--gcs) / 4) + 1);
+	}
+
+	.c-quarter:nth-child(3 of .c-quarter) {
+		--start: calc((var(--gcs) / 4) * 2 + 1);
+	}
+
+	.c-quarter:nth-child(4 of .c-quarter) {
+		--start: calc(((var(--gcs) / 4) * 3) + 1);
 	}
 
 	.c-half {
